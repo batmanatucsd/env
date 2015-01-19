@@ -176,7 +176,7 @@ set nocompatible		" get rid of strict vi compatibility
 filetype off        " required
 
 "set the runtime path to include Vundle and initalize
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim/
 "call vundle#rc()
 call vundle#begin()
 
