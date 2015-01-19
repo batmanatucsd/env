@@ -2,6 +2,11 @@
 
 # vimrc setup
 echo "Setting up vim"
+if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
+	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+	echo "im here"
+fi
+
 if [ ! -f ~/.vimrc ]; then
 	ln -s ~/env/vim/.vimrc ~/.vimrc
 	echo "Created a symbolic link for .vimrc"
