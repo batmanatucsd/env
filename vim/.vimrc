@@ -178,6 +178,7 @@ filetype off        " required
 "set the runtime path to include Vundle and initalize
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+#call vundle#begin()
 
 " Bundle
 Bundle 'gmarik/vundle'	
@@ -186,8 +187,26 @@ Bundle 'Buffergator'
 
 Bundle 'altercation/vim-colors-solarized'
 
+" Plugin 'gmarik/Vundle.vim'
+" Plugin 'scrooloose/nerdtree.git'
+" Plugin 'bufferator'
+
 " All of your Plugins must be added before the following line
+" call vundle#end()
 filetype plugin indent on " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
+
+
+
+
+
+
+
+
+
+
+
+
+
 
