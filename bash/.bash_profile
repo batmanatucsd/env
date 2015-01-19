@@ -40,8 +40,7 @@ NORMAL='\[\e[0m\]';
 #export \h:\W \u\$ DEFAULT
 #export PS1='\e[1;33m\]\h:\W \u\$\e[0m\] '
 #export PS1='\[\e[1;33m\]\h:\[\e[0;33m\]\u \[\e[0;34m\]\W\[\e[1;33m\](^_^):\[\e[0m\] '
-export PS1="\n$BLUE[$RED\t$BLUE]$NORMAL:$YELLOW\u $BLUE\W$YELLOW(^_^):$NORMAL "
+export PS1="$BLUE[$RED\t$BLUE]$NORMAL:$YELLOW\u $BLUE\W$YELLOW(^_^):$NORMAL "
 
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
-
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01;36:quote=01'
