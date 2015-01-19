@@ -187,7 +187,7 @@ call vundle#begin()
 "Bundle 'altercation/vim-colors-solarized'
 
 " Plugins
-Plugin 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
 
