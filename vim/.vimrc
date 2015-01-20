@@ -88,10 +88,14 @@ set shiftwidth=2
 " :colorscheme birdsofparadise
 syntax enable 
 set background=dark
-let g:solarized_termcolors = 256
-"colorscheme solarized
 "colorscheme northsky
+
+"let g:solarized_termcolors = 256
+"colorscheme solarized
+
+"let g:hybrid_use_Xresources = 1
 colorscheme hybrid
+
 
 " if no colorschemes installed, can use the following.
 " light: makes font change as if background was light
@@ -190,6 +194,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
+Plugin 'w0ng/vim-hybrid'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
