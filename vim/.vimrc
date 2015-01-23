@@ -195,6 +195,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
 Plugin 'w0ng/vim-hybrid'
+Plugin 'ctrlp.vim'
+Plugin 'Syntastic'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
