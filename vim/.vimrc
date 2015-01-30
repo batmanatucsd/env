@@ -26,6 +26,17 @@ set laststatus=2  " always have status line
 set cursorline    " shows the line that the cursor is on
 set wildignore=*.o,*.out
 
+"Syntastic Settings
+set statusline+=%warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 5
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 "syntax coloring
 au BufRead,BufNewFile *.ino set filetype=c
 
