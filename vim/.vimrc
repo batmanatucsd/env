@@ -189,7 +189,7 @@ map <C-n> :NERDTreeToggle<CR>
 " **************************************
 " * CtrlP
 " **************************************
-nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <leader>, :CtrlPTag<cr>
 
 " **************************************
 " * CtrlP
