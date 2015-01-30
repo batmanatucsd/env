@@ -1,6 +1,10 @@
 " Last modified: November 7, 2013
 " Sources: http://vim.wikia.com/
 "
+" *****************************************************************************
+" *****************************  SETTINGS  ************************************
+" *****************************************************************************
+"
 " **************************************
 " * VARIABLES
 " **************************************
@@ -59,9 +63,10 @@ au BufRead,BufNewFile *.ino set filetype=c
 "let &colorcolumn=join(range(81,999),",")
 set colorcolumn=80
 
-" **************************************
-" * TABBING
-" **************************************
+
+" *****************************************************************************
+" *****************************  TABBING  *************************************
+" *****************************************************************************
 " Check out shortcut section for auto-retabbing shortcut
 
 " expandtab: Expand tabs in the following file extensions to spaces so that 
@@ -88,10 +93,13 @@ set shiftwidth=2
 "au BufRead,BufNewFile *.s set shiftwidth=8
 
 
-" **************************************
-" * AESTHETICS
-" **************************************
+" *****************************************************************************
+" *****************************  AESTHETIC  ***********************************
+" *****************************************************************************
 
+" **************************************
+" * COLORSCHEME
+" **************************************
 " There are lots of colorschemes you can use! My personal favorite is 
 " desert. You can see all the colors by opening a file and doing
 " :colorscheme <CTRL> + <D> and then picking an option.
@@ -107,21 +115,14 @@ set background=dark
 "let g:hybrid_use_Xresources = 1
 colorscheme hybrid
 
-
 " if no colorschemes installed, can use the following.
 " light: makes font change as if background was light
 " dark: makes font change as if background was dark
-"
 " set bg=light
-
 
 " syntax off: will turn off syntax highlighting/coloring
 "         on: will turn on syntax highlighting/coloring
 syntax on
-
-" <Ctrl-l> redraws the screen and removes any search highlighting.
-"nnoremap <silent> <C-l> :nohl<CR><C-l>
-
 
 " **************************************
 " * SCREEN 
@@ -130,6 +131,15 @@ if match($TERM, "screen")!=-1
   set term=screen-256color
 endif
 
+" *****************************************************************************
+" ******************************  MAPPING  ************************************
+" *****************************************************************************
+" <Ctrl-l> redraws the screen and removes any search highlighting.
+"nnoremap <silent> <C-l> :nohl<CR><C-l>
+" You can add shortcuts of your own similarly.
+":inoremap ( ()<Esc>:let leavechar=")"<CR>i
+"inoremap { {}<Left>
+"inoremap <C-I> <Esc>
 
 " **************************************
 " * Makefile 
@@ -140,15 +150,6 @@ map cp <esc>:cp<cr>
 " **************************************
 " * QUICK SHORTCUTS
 " **************************************
-
-" You can add shortcuts of your own similarly.
-
-
-":inoremap ( ()<Esc>:let leavechar=")"<CR>i
-"inoremap { {}<Left>
-"inoremap <C-I> <Esc>
-
-
 " hit F10 while not in insert mode to do a quick write and quit
 map <F10> <Esc>:w<CR>
 " hit F11 while not in insert mode to quickly retab everything
@@ -180,9 +181,24 @@ nmap <leader>sl :rightbelow vnew<CR>
 nmap <leader>sk :leftabove  new<CR>
 nmap <leader>sj :rightbelow new<CR>
 
-" Bundle Mappings
-" NerdTree
+" **************************************
+" * NerdTree
+" **************************************
 map <C-n> :NERDTreeToggle<CR>
+
+" **************************************
+" * CtrlP
+" **************************************
+nnoremap <leader>. :CtrlPTag<cr>
+
+" **************************************
+" * CtrlP
+" **************************************
+"nnoremap <silent> <leader>b :TabbarToggle<cr>
+
+" *****************************************************************************
+" *****************************  PLUGINS  *************************************
+" *****************************************************************************
 
 " **************************************
 " * Vundle Set up
@@ -195,13 +211,9 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 "call vundle#rc()
 call vundle#begin()
 
-" Bundle
-"Bundle 'gmarik/vundle'	
-"Bundle 'scrooloose/nerdtree.git'
-"Bundle 'Buffergator'
-"Bundle 'altercation/vim-colors-solarized'
-
-" Plugins
+" **************************************
+" * Plugins
+" **************************************
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
