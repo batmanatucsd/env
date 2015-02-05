@@ -160,6 +160,7 @@ map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 
+"windo size
 map <leader>[ <C-w><
 map <leader>] <C-w>>
 map <leader>- <C-w>-
@@ -187,12 +188,17 @@ nmap <leader>sj :rightbelow new<CR>
 map <C-n> :NERDTreeToggle<CR>
 
 " **************************************
+" * ctags 
+" **************************************
+nnoremap <leader>c :!ctags -R -f ./.tags .<cr>
+
+" **************************************
 " * CtrlP
 " **************************************
 nnoremap <leader>, :CtrlPTag<cr>
 
 " **************************************
-" * CtrlP
+" * Tagbar
 " **************************************
 "nnoremap <silent> <leader>b :TabbarToggle<cr>
 
