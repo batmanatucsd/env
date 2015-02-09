@@ -113,6 +113,8 @@ set background=dark
 "colorscheme solarized
 
 "let g:hybrid_use_Xresources = 1
+let g:doorhinge_termcolors = 256
+let g:railscasts_termcolors = 256
 colorscheme hybrid
 
 " if no colorschemes installed, can use the following.
@@ -223,9 +225,10 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
-Plugin 'w0ng/vim-hybrid'
 Plugin 'ctrlp.vim'
 Plugin 'Syntastic'
+" Colorschemes
+Plugin 'w0ng/vim-hybrid'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
