@@ -151,8 +151,8 @@ nnoremap cp :cp<cr>
 " **************************************
 " * Syntastic
 " **************************************
-nnoremap <silent> <C-c> :lclose<CR>:lclose<CR>
-nnoremap <silent> <C-l> :lopen<CR>
+nnoremap <silent> <C-x> :lclose<CR>:lclose<CR>
+nnoremap <silent> <C-a> <ESC>:lopen<CR>
 
 " **************************************
 " * QUICK SHORTCUTS
@@ -236,6 +236,9 @@ Plugin 'Tagbar'
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
 "Plugin 'Solarized'
+" bling/vim-airline
+" tpope/vim-fugitive
+" edkolev/tmuxline.vim
 
 " All of your Plugins must be added before the following line
 call vundle#end()
