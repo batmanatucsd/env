@@ -29,6 +29,7 @@ set hlsearch			" highlight searches
 set laststatus=2  " always have status line
 set cursorline    " shows the line that the cursor is on
 set wildignore=*.o,*.out
+set tags=.tags
 
 "Syntastic Settings
 set statusline+=%warningmsg#
@@ -113,8 +114,6 @@ set background=dark
 "colorscheme solarized
 
 "let g:hybrid_use_Xresources = 1
-let g:doorhinge_termcolors = 256
-let g:railscasts_termcolors = 256
 colorscheme hybrid
 
 " if no colorschemes installed, can use the following.
@@ -146,8 +145,14 @@ endif
 " **************************************
 " * Makefile 
 " **************************************
-map cn <esc>:cn<cr>
-map cp <esc>:cp<cr>
+nnoremap cn :cn<cr>
+nnoremap cp :cp<cr>
+
+" **************************************
+" * Syntastic
+" **************************************
+nnoremap <silent> <C-c> :lclose<CR>:lclose<CR>
+nnoremap <silent> <C-l> :lopen<CR>
 
 " **************************************
 " * QUICK SHORTCUTS
@@ -192,7 +197,7 @@ map <C-n> :NERDTreeToggle<CR>
 " **************************************
 " * ctags 
 " **************************************
-nnoremap <leader>c :!ctags -R -f ./.tags .<cr>
+nnoremap <leader>ctags :!ctags -R -f ./.tags .<CR>
 
 " **************************************
 " * CtrlP
@@ -202,7 +207,7 @@ nnoremap <leader>, :CtrlPTag<cr>
 " **************************************
 " * Tagbar
 " **************************************
-"nnoremap <silent> <leader>b :TabbarToggle<cr>
+nnoremap <silent> <leader>g :TagbarToggle<cr>
 
 " *****************************************************************************
 " *****************************  PLUGINS  *************************************
@@ -227,8 +232,10 @@ Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
 Plugin 'ctrlp.vim'
 Plugin 'Syntastic'
+Plugin 'Tagbar'
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
+"Plugin 'Solarized'
 
 " All of your Plugins must be added before the following line
 call vundle#end()
