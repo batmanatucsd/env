@@ -147,6 +147,7 @@ endif
 " **************************************
 nnoremap cn :cn<cr>
 nnoremap cp :cp<cr>
+map <F2> :w<CR>:make<CR>
 
 " **************************************
 " * Syntastic
