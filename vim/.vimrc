@@ -69,7 +69,18 @@ let g:UltiSnipsEditSplit="vertical"
 "let g:airline#extension#batline#enabled = 1
 
 " **************************************
-" * Unimpaired Settings
+" * NERDTree Settings
+" **************************************
+let NERDTreeDirArrows=0
+
+" **************************************
+" * indentLine Settings
+" **************************************
+let g:indentLine_color_term = 239
+"let g:indentLine_char = '|'
+
+" **************************************
+" * EasyMotion Settings
 " **************************************
 "nmap s <Plug>(easymotion-s)
 "omap t <Plug>(easymotion-bd-tl)
@@ -100,7 +111,7 @@ au BufRead,BufNewFile *.ino set filetype=c
 
 "let &colorcolumn=join(range(81,999),",")
 set colorcolumn=80
-
+let &colorcolumn="80,".join(range(500,999),",")
 
 " *****************************************************************************
 " *****************************  TABBING  *************************************
@@ -130,7 +141,6 @@ set shiftwidth=2
 "au BufRead,BufNewFile *.s set tabstop=8
 "au BufRead,BufNewFile *.s set shiftwidth=8
 
-
 " *****************************************************************************
 " *****************************  AESTHETIC  ***********************************
 " *****************************************************************************
@@ -151,7 +161,8 @@ set background=dark
 "colorscheme solarized
 
 "let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+"colorscheme hybrid
+colorscheme molokai
 
 " if no colorschemes installed, can use the following.
 " light: makes font change as if background was light
@@ -161,6 +172,15 @@ colorscheme hybrid
 " syntax off: will turn off syntax highlighting/coloring
 "         on: will turn on syntax highlighting/coloring
 syntax on
+
+" colors
+hi Search ctermfg=15 ctermbg=9 
+hi Visual ctermbg=236
+hi Normal ctermfg=7
+hi Comment ctermfg=8
+hi ColorColumn ctermbg=235
+hi LineNr ctermfg=white ctermbg=237
+hi CursorLineNr ctermfg=9
 
 " **************************************
 " * SCREEN 
@@ -217,7 +237,12 @@ map <leader>= <C-w>+
 map <leader>0 <C-w>=
 
 "inoremap ( ()<Esc>i 
-inoremap { {}<Esc>i
+imap {} {}<Left>
+imap [] []<Left>
+imap () ()<Left>
+imap "" ""<Left>
+imap '' ''<Left>
+imap <> <><Left>
 
 " window
 nmap <leader>swh :topleft  vnew<CR>
@@ -285,11 +310,11 @@ Plugin 'Valloric/YouCompleteMe.git'
 Plugin 'unimpaired.vim'
 Plugin 'vim-airline'
 Plugin 'myusuf3/numbers.vim'
+Plugin 'Yggdroot/indentLine'
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
 Plugin 'molokai'
 "Plugin 'Solarized'
-" bling/vim-airline
 " edkolev/tmuxline.vim
 
 " All of your Plugins must be added before the following line
