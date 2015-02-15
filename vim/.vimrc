@@ -29,18 +29,55 @@ set hlsearch			" highlight searches
 set laststatus=2  " always have status line
 set cursorline    " shows the line that the cursor is on
 set wildignore=*.o,*.out
-set tags=.tags
+set smartcase
+set tags=.tags " set ctags file
 
-"Syntastic Settings
+" filetype specific completion
+filetype plugin on 
+set omnifunc=syntaxcomplete#Complete 
+
 set statusline+=%warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" **************************************
+" * Syntastic Settings
+" **************************************
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" **************************************
+" * YouCompleteMe Settings
+" **************************************
+let g:ycm_key_list_select_completion=[]
+let g:ycm_key_list_previous_completion=[]
+"let g:ycm_global_ycm_extr_conf = "~/.ycm_extra_conf.py"
+let g:ycm_register_as_syntastic_checker = 0
+
+" **************************************
+" * UltiSnips Settings
+" **************************************
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsEditSplit="vertical"
+
+" **************************************
+" * Airline Settings
+" **************************************
+"let g:airline#extension#batline#enabled = 1
+
+" **************************************
+" * Unimpaired Settings
+" **************************************
+"nmap s <Plug>(easymotion-s)
+"omap t <Plug>(easymotion-bd-tl)
+"map / <Plug>(easymotion-sn)
+"omap / <Plug>(easymotion-tn)
+"map n <Plug>(easymotion-next)
+"map N <Plug>(easymotion-prev)
+let g:EasyMotion_smartcase = 1
 
 "syntax coloring
 au BufRead,BufNewFile *.ino set filetype=c
@@ -147,7 +184,11 @@ endif
 " **************************************
 nnoremap cn :cn<cr>
 nnoremap cp :cp<cr>
-map <F2> :w<CR>:make<CR>
+" save and make
+nnoremap <F2> :w<CR>:make<CR>
+nnoremap <F3> :NumbersToggle<CR> :set nu<CR>
+let hlstate=0
+nnoremap <silent> <F4> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
 
 " **************************************
 " * Syntastic
@@ -234,11 +275,21 @@ Plugin 'Buffergator'
 Plugin 'ctrlp.vim'
 Plugin 'Syntastic'
 Plugin 'Tagbar'
+Plugin 'The-NERD-Commenter'
+Plugin 'fugitive.vim'
+Plugin 'EasyMotion'
+Plugin 'surround.vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'Valloric/YouCompleteMe.git'
+Plugin 'unimpaired.vim'
+Plugin 'vim-airline'
+Plugin 'myusuf3/numbers.vim'
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
+Plugin 'molokai'
 "Plugin 'Solarized'
 " bling/vim-airline
-" tpope/vim-fugitive
 " edkolev/tmuxline.vim
 
 " All of your Plugins must be added before the following line
