@@ -1,8 +1,9 @@
 " Last modified: November 7, 2013
 " Sources: http://vim.wikia.com/
 "
+" => Settings "{{{
 " *****************************************************************************
-" *****************************  SETTINGS  ************************************"{{{
+" *****************************  SETTINGS  ************************************
 " *****************************************************************************
 "
 " **************************************
@@ -33,8 +34,38 @@ set smartcase
 set tags=.tags " set ctags file
 set t_Co=256 " set terminal color
 
+" Set to auto read when a file is changed from the outside
+set autoread
+
+" In many terminal emulators the mouse works just fine, thus enable it.
+if has('mouse')
+  set mouse=a
+endif
+
+" Don't redraw while executing macros (good performance config)
+set lazyredraw 
+
+" For regular expressions turn magic on
+set magic
 " filetype specific completion
-filetype plugin on 
+
+" Set utf8 as standard encoding and en_US as the standard language
+set encoding=utf8
+
+" Linebreak on 500 characters
+set lbr
+set tw=500
+
+set ai "Auto indent
+set si "Smart indent
+"set wrap "Wrap lines
+
+" No annoying sound on errors
+set noerrorbells
+set novisualbell
+set noeb vb t_vb=
+set tm=500
+
 set omnifunc=syntaxcomplete#Complete 
 
 set statusline+=%warningmsg#
@@ -123,8 +154,9 @@ au BufRead,BufNewFile *.ino set filetype=c
 set colorcolumn=80
 let &colorcolumn="80,".join(range(500,999),",")
 
+" => Tabs "{{{
 " *****************************************************************************
-" *****************************  TABBING  *************************************"{{{
+" *****************************  TABBING  *************************************
 " *****************************************************************************
 " Check out shortcut section for auto-retabbing shortcut
 
@@ -151,8 +183,9 @@ set shiftwidth=2
 "au BufRead,BufNewFile *.s set tabstop=8
 "au BufRead,BufNewFile *.s set shiftwidth=8"}}}
 
+" => Aesthetic "{{{
 " *****************************************************************************
-" *****************************  AESTHETIC  ***********************************"{{{
+" *****************************  AESTHETIC  ***********************************
 " *****************************************************************************
 
 " **************************************
@@ -199,8 +232,9 @@ if match($TERM, "screen")!=-1
   set term=screen-256color
 endif"}}}
 
+" => Mapping "{{{
 " *****************************************************************************
-" ******************************  MAPPING  ************************************"{{{
+" ******************************  MAPPING  ************************************
 " *****************************************************************************
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 "nnoremap <silent> <C-l> :nohl<CR><C-l>
@@ -283,8 +317,9 @@ nnoremap <leader>, :CtrlPTag<cr>
 " **************************************
 nnoremap <silent> <leader>g :TagbarToggle<cr>"}}}
 
+" => Plugins "{{{
 " *****************************************************************************
-" *****************************  PLUGINS  *************************************"{{{
+" *****************************  PLUGINS  *************************************
 " *****************************************************************************
 
 " **************************************
