@@ -31,6 +31,7 @@ set cursorline    " shows the line that the cursor is on
 set wildignore=*.o,*.out
 set smartcase
 set tags=.tags " set ctags file
+set t_Co=256 " set terminal color
 
 " filetype specific completion
 filetype plugin on 
@@ -48,6 +49,13 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 5
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" **************************************
+" * Neocomplcache Settings
+" **************************************
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
 
 " **************************************
 " * YouCompleteMe Settings
@@ -88,6 +96,8 @@ let g:indentLine_color_term = 239
 "omap / <Plug>(easymotion-tn)
 "map n <Plug>(easymotion-next)
 "map N <Plug>(easymotion-prev)
+map <Leader><Leader>/ <Plug>(easymotion-sn)
+map <Leader><Leader>/ <Plug>(easymotion-tn)
 let g:EasyMotion_smartcase = 1
 
 "syntax coloring
@@ -213,8 +223,10 @@ nnoremap <silent> <F4> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearc
 " **************************************
 " * Syntastic
 " **************************************
-nnoremap <silent> <C-x> :lclose<CR>:lclose<CR>
-nnoremap <silent> <C-a> <ESC>:lopen<CR>
+let locationlist=0
+nnoremap <silent> <F5> :if (locationlist%2 == 0) \| lclose <cr> lclose \| else \| lopen \| endif \| let locationlist=locationlist+1<cr>
+"nnoremap <silent> <C-x> :lclose<CR>:lclose<CR>
+"nnoremap <silent> <C-a> <ESC>:lopen<CR>
 
 " **************************************
 " * QUICK SHORTCUTS
@@ -237,12 +249,7 @@ map <leader>= <C-w>+
 map <leader>0 <C-w>=
 
 "inoremap ( ()<Esc>i 
-imap {} {}<Left>
-imap [] []<Left>
-imap () ()<Left>
-imap "" ""<Left>
-imap '' ''<Left>
-imap <> <><Left>
+imap { {<CR>}<Left><CR><Up>
 
 " window
 nmap <leader>swh :topleft  vnew<CR>
@@ -302,15 +309,16 @@ Plugin 'Syntastic'
 Plugin 'Tagbar'
 Plugin 'The-NERD-Commenter'
 Plugin 'fugitive.vim'
-Plugin 'EasyMotion'
 Plugin 'surround.vim'
+Plugin 'Lokaltog/vim-easymotion'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-Plugin 'Valloric/YouCompleteMe.git'
-Plugin 'unimpaired.vim'
-Plugin 'vim-airline'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'bling/vim-airline'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'Valloric/YouCompleteMe.git'
+"Plugin 'Shougo/neocomplcache'
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
 Plugin 'molokai'
