@@ -215,7 +215,7 @@ endif
 nnoremap cn :cn<cr>
 nnoremap cp :cp<cr>
 " save and make
-nnoremap <F2> :w<CR>:make<CR>
+nnoremap <F2> :w<CR>:make <SPACE>
 nnoremap <F3> :NumbersToggle<CR> :set nu<CR>
 let hlstate=0
 nnoremap <silent> <F4> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
