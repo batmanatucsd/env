@@ -229,7 +229,8 @@ hi CursorLineNr ctermfg=9
 " * SCREEN 
 " **************************************
 if match($TERM, "screen")!=-1
-  set term=screen-256color
+  "set term=screen-256color
+	set term=xterm
 endif"}}}
 
 " => Mapping "{{{
