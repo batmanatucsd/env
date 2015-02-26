@@ -181,8 +181,11 @@ set background=dark
 "colorscheme solarized
 
 "let g:hybrid_use_Xresources = 1
+try
 "colorscheme hybrid
 colorscheme molokai
+catch
+endtry
 
 " if no colorschemes installed, can use the following.
 " light: makes font change as if background was light
@@ -194,13 +197,35 @@ colorscheme molokai
 syntax on
 
 " colors
-hi Search ctermfg=15 ctermbg=9 
-hi Visual ctermbg=236
-hi Normal ctermfg=7
-hi Comment ctermfg=8
-hi ColorColumn ctermbg=235
-hi LineNr ctermfg=white ctermbg=237
-hi CursorLineNr ctermfg=9
+hi Search          ctermfg=15 ctermbg=9 
+hi Visual          ctermbg=236
+hi Normal          ctermfg=7
+hi Comment         ctermfg=8
+hi ColorColumn     ctermbg=235
+hi LineNr          ctermfg=white ctermbg=237
+hi CursorLineNr    ctermfg=9
+
+
+"hi Function        ctermfg=31
+hi Function        ctermfg=81
+
+" incdlue
+hi PreProc         ctermfg=1
+" ifdef
+hi PreCondit       ctermfg=83               cterm=bold
+
+hi Typedef         ctermfg=9
+hi Type            ctermfg=9                cterm=none
+" define
+hi Macro           ctermfg=31
+hi SpecialKey      ctermfg=81
+"hi SpecialKey      ctermfg=81
+"hi Macro           ctermfg=71 
+
+hi Directory       ctermfg=83               cterm=bold
+
+hi FoldColumn      ctermfg=67  ctermbg=233 
+hi Folded          ctermfg=67  ctermbg=233
 
 " **************************************
 " * SCREEN 
@@ -231,7 +256,7 @@ nnoremap <SPACE> za
 
 " -> Function Keys "{{{
 let hlstate=0
-let locationlist=0
+let locationlist=1
 " <F2> 
 nnoremap <F2> :w<CR>:make <SPACE>
 " <F3>
@@ -239,7 +264,7 @@ nnoremap <silent> <F3> :NumbersToggle<CR> :set nu<CR>
 " <F4>
 nnoremap <silent> <F4> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
 " <F5>
-nnoremap <silent> <F5> :if (locationlist%2 == 0) \| lclose <cr> lclose \| else \| lopen \| endif \| let locationlist=locationlist+1<cr>
+nnoremap <silent> <F5> :if (locationlist%2 == 0) \| lclose <cr> lclose \| else \| lopen3 \| endif \| let locationlist=locationlist+1<cr>
 
 " hit F10 while not in insert mode to do a quick write and quit
 "map <F10> <Esc>:w<CR>
@@ -287,7 +312,8 @@ au TabLeave * let g:lasttab = tabpagenr()
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
-map <leader>te :tabedit <C-r>=expand("%:p:h")<CR>/
+"map <leader>te :tabedit <C-r>=expand("%:p:h")<CR>/
+map <leader>te :tabe<Space>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<CR>
@@ -344,15 +370,35 @@ map <Leader><Leader><Space> <Plug>(easymotion-tn)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" => Functions "{{{
+function! Example()
+endfunction
+"}}}
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " => Plugin Settings "{{{
 " **************************************
 " * syntastic settings
 " **************************************
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_loc_list_height = 5
+let g:syntastic_loc_list_height = 3
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+if($STM32 == 1)
+  let g:syntastic_c_checkers = ['make']
+endif
+" examples
+"if(stridx(expand("%:p:h"), "/Users/batman/Projects/Micromouse/Code/src/") == 0 || stridx(expand("%:p:h"), "~/Projects/Micromouse/Code/src/") == 0)
+"  let b:syntastic_checkers = ['make']
+"endif
+"let g:syntastic_c_config_file = '.syntastic_c_config'
+"let g:syntastic_c_include_dirs = ['~/uMouse/Code/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/']
+"let g:syntastic_c_remove_include_errors = 1
+"let g:syntastic_c_no_default_include_dirs = 1
+"let g:syntastic_c_check_header = 1
+"let g:syntastic_c_auto_refresh_includes = 0
 
 " **************************************
 " * neocomplcache settings
@@ -435,6 +481,8 @@ Plugin 'bling/vim-airline'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'Valloric/YouCompleteMe.git'
+Plugin 'justinmk/vim-syntax-extra'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 "Plugin 'Shougo/neocomplcache'
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
