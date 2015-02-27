@@ -323,13 +323,13 @@ nmap <leader>sk :leftabove  new<CR>
 nmap <leader>sj :rightbelow new<CR>
 
 " toggle between last buffer
-map <Leader>tb :b#<CR>
+nmap <Leader>l :b#<CR>
 
 " close current buffer
 nmap <leader>x :q<CR>
 
 " delete current buffer
-map <leader>d :bd<CR>
+nmap <leader>d :bd<CR>
 "}}}
 " -> Plugin Mappings "{{{
 " **************************************
