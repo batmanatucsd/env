@@ -271,7 +271,8 @@ map <C-l> <C-w>l
 "}}}
 " -> Insert Mode "{{{
 " Pairs
-imap { {<CR>}<Left><CR><Up>
+"imap { {<CR>}<Left><CR><Up>
+imap { {}<Left>
 imap [ []<Left>
 imap ( ()<Left>
 imap < <><Left>
@@ -282,6 +283,8 @@ imap <> <>
 
 " Navigation
 imap <C-l> <Right>
+imap <C-h> <Left>
+imap <C-b> <Backspace>
 "}}}
 " -> Windows "{{{
 nmap <leader>swh :topleft  vnew<CR>
@@ -322,6 +325,11 @@ nmap <leader>sj :rightbelow new<CR>
 " toggle between last buffer
 map <Leader>tb :b#<CR>
 
+" close current buffer
+nmap <leader>x :q<CR>
+
+" delete current buffer
+map <leader>d :bd<CR>
 "}}}
 " -> Plugin Mappings "{{{
 " **************************************
