@@ -97,6 +97,8 @@ set statusline+=%warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+"set foldlevel=1
+
 " **************************************
 " * OVER 80 CHARS!
 " **************************************
@@ -250,7 +252,7 @@ nnoremap <SPACE> za
 let hlstate=0
 let locationlist=1
 " <F2> 
-nnoremap <F2> :w<CR>:make <SPACE>
+nnoremap <F2> :w<CR>:make<SPACE>
 " <F3>
 nnoremap <silent> <F3> :NumbersToggle<CR> :set nu<CR>
 " <F4>
@@ -275,11 +277,9 @@ map <C-l> <C-w>l
 imap { {}<Left>
 imap [ []<Left>
 imap ( ()<Left>
-imap < <><Left>
 imap {} {}
 imap [] []
 imap () ()
-imap <> <>
 
 " Navigation
 imap <C-l> <Right>
@@ -342,7 +342,7 @@ map <leader>nf :NERDTreeFind<CR>
 " **************************************
 " * ctags 
 " **************************************
-nnoremap <leader>ctags :!ctags -R -f ./.tags .<CR>
+nnoremap <leader>c :!ctags -R -f ./.tags .<CR>
 
 " **************************************
 " * CtrlP
