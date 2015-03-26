@@ -377,7 +377,7 @@ endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" => Plugin Settings "{{{
+" => Plugin_Settings "{{{
 " **************************************
 " * syntastic settings
 " **************************************
@@ -468,7 +468,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
 Plugin 'ctrlp.vim'
-Plugin 'Syntastic'
+"Plugin 'Syntastic'
 Plugin 'Tagbar'
 Plugin 'The-NERD-Commenter'
 Plugin 'fugitive.vim'
