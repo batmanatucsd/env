@@ -45,6 +45,14 @@ set smartcase
 set tags=.tags " set ctags file
 set t_Co=256 " set terminal color
 
+" Set up GDB
+set previewheight=12
+run macros/gdb_mappings.vim
+set gdbprg=/usr/local/bin/gdb
+"set gdbvariables="gdb-variables"
+" set the path
+"let $PATH = '/usr/local/bin:'.$PATH
+
 " Sets how many lines of history VIM has to remember
 set history=700
 
@@ -88,16 +96,14 @@ autocmd BufReadPost *
 " Remember info about open buffers on close
 set viminfo^=%
 
-"syntax coloring
-au BufRead,BufNewFile *.ino set filetype=c
+" syntax coloring
+au BufRead,BufNewFile *.ino set filetype=c " for arduino
 
 set omnifunc=syntaxcomplete#Complete 
 
 set statusline+=%warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-
-"set foldlevel=1
 
 " **************************************
 " * OVER 80 CHARS!
@@ -118,6 +124,7 @@ set statusline+=%*
 "let &colorcolumn=join(range(81,999),",")
 set colorcolumn=80
 let &colorcolumn="80,".join(range(500,999),",")
+
 "}}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -240,11 +247,17 @@ endif
 " **************************************
 " * Makefile 
 " **************************************
+" quicklist // for error checking
 nnoremap cn :cn<CR>
 nnoremap cp :cp<CR>
+
 " save and make
 nnoremap <leader>w :w<CR>
-map <C-c> <C-c><F3>
+nnoremap <leader>q :wq<CR>
+
+" gdb
+nnoremap <leader>g :call gdb("")<Left><Left>
+
 " fold
 nnoremap <SPACE> za
 
@@ -252,13 +265,17 @@ nnoremap <SPACE> za
 let hlstate=0
 let locationlist=1
 " <F2> 
-nnoremap <F2> :w<CR>:make<SPACE>
+nnoremap <F2> :wa<CR>:make<SPACE>
 " <F3>
 nnoremap <silent> <F3> :NumbersToggle<CR> :set nu<CR>
 " <F4>
 nnoremap <silent> <F4> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
 " <F5>
 nnoremap <silent> <F5> :if (locationlist%2 == 0) \| lclose <cr> lclose \| else \| lopen3 \| endif \| let locationlist=locationlist+1<cr>
+" <F7>
+" used for gdb macros
+" <F8>
+nnoremap <silent> <F8> :bel 30vsp gdb-variables<CR>
 
 " hit F10 while not in insert mode to do a quick write and quit
 "map <F10> <Esc>:w<CR>
@@ -284,7 +301,9 @@ imap () ()
 " Navigation
 imap <C-l> <Right>
 imap <C-h> <Left>
-imap <C-b> <Backspace>
+imap <C-j> <Down>
+imap <C-k> <Up>
+imap <C-x> <C-o>x
 "}}}
 " -> Windows "{{{
 nmap <leader>swh :topleft  vnew<CR>
@@ -352,7 +371,7 @@ nnoremap <leader>, :CtrlPTag<cr>
 " **************************************
 " * Tagbar
 " **************************************
-nnoremap <silent> <leader>g :TagbarToggle<cr>
+nnoremap <silent> <leader>f :TagbarToggle<cr>
 
 " **************************************
 " * EasyMotion Settings
@@ -365,6 +384,11 @@ nnoremap <silent> <leader>g :TagbarToggle<cr>
 "map N <Plug>(easymotion-prev)
 map <Leader><Leader><Space> <Plug>(easymotion-sn)
 map <Leader><Leader><Space> <Plug>(easymotion-tn)
+
+" **************************************
+" * Numbers
+" **************************************
+map <C-c> <C-c><F3>
 "}}}
 "}}}
 
@@ -480,9 +504,10 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-airline'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'Yggdroot/indentLine'
-Plugin 'Valloric/YouCompleteMe.git'
+"Plugin 'Valloric/YouCompleteMe.git'
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'Shougo/neocomplete.vim'
 "Plugin 'Shougo/neocomplcache'
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
