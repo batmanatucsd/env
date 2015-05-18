@@ -1,3 +1,5 @@
+# my batman logo
+cat ~/env/batman
 
 #export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/lib/stlink"
@@ -12,6 +14,7 @@ alias g++='g++-4.9'
 alias c++='c++-4.9'
 
 alias ls="ls -G"
+alias ll="ls -Gl"
 alias :q="exit"
 
 function cl () { cd "$@" && ls; }

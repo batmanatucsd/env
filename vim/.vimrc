@@ -1,5 +1,6 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Last modified: November 7, 2013
+"=============================================================================
+
+" Last modified: May 17, 2015
 " Author: James A. Lee
 "
 " Sections:
@@ -10,16 +11,17 @@
 " 	=> Plugin_Settings
 " 	=> Plugins
 "
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"=============================================================================
 
 " => Settings "{{{
 " *****************************************************************************
 " *****************************  SETTINGS  ************************************
 " *****************************************************************************
 "
-" **************************************
+" -----------------------------------------------------------------------------
 " * VARIABLES
-" **************************************
+" -----------------------------------------------------------------------------
 " Comment out the ones you don't like by putting a " before the line
 set nu				" line numbering on
 set autoindent			" turns autoindent on
@@ -37,6 +39,7 @@ set incsearch			" incremental
 set noswapfile			" no intermediate files used when saving
 set ruler			" always show position in file
 set foldmethod=marker
+"set foldmethod=manual
 set hlsearch			" highlight searches
 set laststatus=2  " always have status line
 set cursorline    " shows the line that the cursor is on
@@ -44,6 +47,7 @@ set wildignore=*.o,*.out
 set smartcase
 set tags=.tags " set ctags file
 set t_Co=256 " set terminal color
+set t_ut=
 
 " Set up GDB
 set previewheight=12
@@ -105,6 +109,11 @@ set statusline+=%warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" Saving and Loading fold views when closing and opening vim 
+" useful when doing fold in manual mode
+"au BufWinLeave * mkview
+"au BufWinEnter * silent loadview
+
 " **************************************
 " * OVER 80 CHARS!
 " **************************************
@@ -124,10 +133,7 @@ set statusline+=%*
 "let &colorcolumn=join(range(81,999),",")
 set colorcolumn=80
 let &colorcolumn="80,".join(range(500,999),",")
-
 "}}}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " => Tabs "{{{
 " *****************************************************************************
@@ -156,19 +162,16 @@ set shiftwidth=2
 " The following is for assembly file indentation
 "au BufRead,BufNewFile *.s set noexpandtab
 "au BufRead,BufNewFile *.s set tabstop=8
-"au BufRead,BufNewFile *.s set shiftwidth=8
-"}}}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"au BufRead,BufNewFile *.s set shiftwidth=8"}}}
 
 " => Aesthetic "{{{
 " *****************************************************************************
 " *****************************  AESTHETIC  ***********************************
 " *****************************************************************************
 
-" **************************************
+" -----------------------------------------------------------------------------
 " * COLORSCHEME
-" **************************************
+" -----------------------------------------------------------------------------
 " There are lots of colorschemes you can use! My personal favorite is 
 " desert. You can see all the colors by opening a file and doing
 " :colorscheme <CTRL> + <D> and then picking an option.
@@ -228,25 +231,23 @@ hi Directory       ctermfg=83               cterm=bold
 hi FoldColumn      ctermfg=67  ctermbg=233 
 hi Folded          ctermfg=67  ctermbg=233
 
-" **************************************
+" -----------------------------------------------------------------------------
 " * SCREEN 
-" **************************************
+" -----------------------------------------------------------------------------
 if match($TERM, "screen")!=-1
   "set term=screen-256color
 	set term=xterm
 endif
 "}}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " => Mapping "{{{
 " *****************************************************************************
 " ******************************  MAPPING  ************************************
 " *****************************************************************************
 	
-" **************************************
+" -----------------------------------------------------------------------------
 " * Makefile 
-" **************************************
+" -----------------------------------------------------------------------------
 " quicklist // for error checking
 nnoremap cn :cn<CR>
 nnoremap cp :cp<CR>
@@ -262,16 +263,20 @@ nnoremap <leader>g :call gdb("")<Left><Left>
 nnoremap <SPACE> za
 
 " -> Function Keys "{{{
+" -----------------------------------------------------------------------------
+"  Function Keys
+" -----------------------------------------------------------------------------
 let hlstate=0
 let locationlist=1
+
+" <F1>
+nnoremap <silent> <F1> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
 " <F2> 
 nnoremap <F2> :wa<CR>:make<SPACE>
 " <F3>
 nnoremap <silent> <F3> :NumbersToggle<CR> :set nu<CR>
-" <F4>
-nnoremap <silent> <F4> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
-" <F5>
-nnoremap <silent> <F5> :if (locationlist%2 == 0) \| lclose <cr> lclose \| else \| lopen3 \| endif \| let locationlist=locationlist+1<cr>
+"<F5>
+"nnoremap <silent> <F5> :if (locationlist%2 == 0) \| lclose <cr> lclose \| else \| lopen3 \| endif \| let locationlist=locationlist+1<cr>
 " <F7>
 " used for gdb macros
 " <F8>
@@ -283,20 +288,25 @@ nnoremap <silent> <F8> :bel 30vsp gdb-variables<CR>
 "map <F11> <Esc>gg=G<ESC>:retab<CR>
 "}}}
 " -> Nagivation "{{{
+" -----------------------------------------------------------------------------
+"  Navigation
+" -----------------------------------------------------------------------------
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 "}}}
 " -> Insert Mode "{{{
+" -----------------------------------------------------------------------------
+"  Insert Mode
+" -----------------------------------------------------------------------------
 " Pairs
-"imap { {<CR>}<Left><CR><Up>
-imap { {}<Left>
+imap { {<Cr><Cr>}<Up><Tab>
 imap [ []<Left>
 imap ( ()<Left>
-imap {} {}
 imap [] []
-imap () ()
+imap {} {}
+imap () ()<Right>
 
 " Navigation
 imap <C-l> <Right>
@@ -304,8 +314,8 @@ imap <C-h> <Left>
 imap <C-j> <Down>
 imap <C-k> <Up>
 imap <C-x> <C-o>x
-"}}}
-" -> Windows "{{{
+
+" -> Windows 
 nmap <leader>swh :topleft  vnew<CR>
 nmap <leader>swl :botright vnew<CR>
 nmap <leader>swk :topleft  new<CR>
@@ -319,6 +329,9 @@ map <leader>= <C-w>+
 map <leader>0 <C-w>=
 "}}}
 " -> Tabs "{{{
+" -----------------------------------------------------------------------------
+"  Tabs
+" -----------------------------------------------------------------------------
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
@@ -333,8 +346,8 @@ map <leader>te :tabe<Space>
 map <leader>tn :tabnew<CR>
 map <leader>tm :tabmove 
 map <leader>tq :tabclose<CR>
-"}}}
-" -> Buffers "{{{
+
+" -> Buffers 
 " opening new buffers
 nmap <leader>sh :leftabove  vnew<CR>
 nmap <leader>sl :rightbelow vnew<CR>
@@ -351,31 +364,24 @@ nmap <leader>x :q<CR>
 nmap <leader>d :bd<CR>
 "}}}
 " -> Plugin Mappings "{{{
-" **************************************
-" * NerdTree
-" **************************************
+" -----------------------------------------------------------------------------
+"  Plugin Mappings
+" -----------------------------------------------------------------------------
+" //  NerdTree
 map <C-n> :NERDTreeToggle<CR>
 map <leader>nb <C-n>B
 map <leader>nf :NERDTreeFind<CR>
 
-" **************************************
-" * ctags 
-" **************************************
+" // ctags 
 nnoremap <leader>c :!ctags -R -f ./.tags .<CR>
 
-" **************************************
-" * CtrlP
-" **************************************
+" // CtrlP
 nnoremap <leader>, :CtrlPTag<cr>
 
-" **************************************
-" * Tagbar
-" **************************************
+" // Tagbar
 nnoremap <silent> <leader>f :TagbarToggle<cr>
 
-" **************************************
-" * EasyMotion Settings
-" **************************************
+" // EasyMotion Settings
 "nmap s <Plug>(easymotion-s)
 "omap t <Plug>(easymotion-bd-tl)
 "map / <Plug>(easymotion-sn)
@@ -385,26 +391,26 @@ nnoremap <silent> <leader>f :TagbarToggle<cr>
 map <Leader><Leader><Space> <Plug>(easymotion-sn)
 map <Leader><Leader><Space> <Plug>(easymotion-tn)
 
-" **************************************
-" * Numbers
-" **************************************
-map <C-c> <C-c><F3>
+" // Numbers
+map <C-c> <C-c><F3>"}}}
 "}}}
-"}}}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " => Functions "{{{
+" *****************************************************************************
+" ****************************  Functions  ************************************
+" *****************************************************************************
 function! Example()
 endfunction
 "}}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " => Plugin_Settings "{{{
-" **************************************
-" * syntastic settings
-" **************************************
+" *****************************************************************************
+" ************************* Plugin_Settings ***********************************
+" *****************************************************************************
+
+" -----------------------------------------------------------------------------
+" // syntastic settings
+" -----------------------------------------------------------------------------
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_loc_list_height = 3
@@ -424,59 +430,53 @@ endif
 "let g:syntastic_c_check_header = 1
 "let g:syntastic_c_auto_refresh_includes = 0
 
-" **************************************
-" * neocomplcache settings
-" **************************************
+" -----------------------------------------------------------------------------
+" // neocomplcache settings
+" -----------------------------------------------------------------------------
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_min_syntax_length = 3
 
-" **************************************
-" * youcompleteme settings
-" **************************************
+" -----------------------------------------------------------------------------
+" // youcompleteme settings
+" -----------------------------------------------------------------------------
 let g:ycm_key_list_select_completion=[]
 let g:ycm_key_list_previous_completion=[]
 "let g:ycm_global_ycm_extr_conf = "~/.ycm_extra_conf.py"
 let g:ycm_register_as_syntastic_checker = 0
 
-" **************************************
-" * ultisnips settings
-" **************************************
+" -----------------------------------------------------------------------------
+" // ultisnips settings
+" -----------------------------------------------------------------------------
 let g:ultisnipsexpandtrigger="<tab>"
 let g:ultisnipseditsplit="vertical"
 
-" **************************************
-" * airline settings
-" **************************************
+" -----------------------------------------------------------------------------
+" // airline settings
+" -----------------------------------------------------------------------------
 "let g:airline#extension#batline#enabled = 1
 
-" **************************************
-" * nerdtree settings
-" **************************************
+" -----------------------------------------------------------------------------
+" // nerdtree settings
+" -----------------------------------------------------------------------------
 let nerdtreedirarrows=0
 
-" **************************************
-" * indentline settings
-" **************************************
+" // indentline settings
 let g:indentLine_color_term = 239
 "let g:indentLine_char = '|'
 
-" **************************************
-" * EasyMotion Settings
-" **************************************
+" // EasyMotion Settings
 let g:EasyMotion_smartcase = 1
 "}}}
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " => Plugins "{{{
 " *****************************************************************************
 " *****************************  PLUGINS  *************************************
 " *****************************************************************************
 
-" **************************************
+" -----------------------------------------------------------------------------
 " * Vundle Set up
-" **************************************
+" -----------------------------------------------------------------------------
 set nocompatible		" get rid of strict vi compatibility
 filetype off        " required
 
@@ -485,9 +485,9 @@ set rtp+=~/.vim/bundle/Vundle.vim/
 "call vundle#rc()
 call vundle#begin()
 
-" **************************************
+" -----------------------------------------------------------------------------
 " * Plugins
-" **************************************
+" -----------------------------------------------------------------------------
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
