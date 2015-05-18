@@ -51,6 +51,8 @@ set t_ut=
 
 " Set up GDB
 set previewheight=12
+set splitbelow
+set splitright
 run macros/gdb_mappings.vim
 set gdbprg=/usr/local/bin/gdb
 "set gdbvariables="gdb-variables"
@@ -270,11 +272,11 @@ let hlstate=0
 let locationlist=1
 
 " <F1>
-nnoremap <silent> <F1> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
+nnoremap <silent> <F1> :NumbersToggle<CR> :set nu<CR>
 " <F2> 
 nnoremap <F2> :wa<CR>:make<SPACE>
 " <F3>
-nnoremap <silent> <F3> :NumbersToggle<CR> :set nu<CR>
+nnoremap <silent> <F3> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
 "<F5>
 "nnoremap <silent> <F5> :if (locationlist%2 == 0) \| lclose <cr> lclose \| else \| lopen3 \| endif \| let locationlist=locationlist+1<cr>
 " <F7>
