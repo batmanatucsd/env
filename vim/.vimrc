@@ -50,11 +50,13 @@ set t_Co=256 " set terminal color
 set t_ut=
 
 " Set up GDB
-set previewheight=12
-set splitbelow
-set splitright
-run macros/gdb_mappings.vim
-set gdbprg=/usr/local/bin/gdb
+if(has("gdb"))
+	set previewheight=12
+	set splitbelow
+	set splitright
+	run macros/gdb_mappings.vim
+	set gdbprg=/usr/local/bin/gdb
+endif
 "set gdbvariables="gdb-variables"
 " set the path
 "let $PATH = '/usr/local/bin:'.$PATH
