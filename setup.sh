@@ -2,13 +2,13 @@
 
 # vimrc setup
 echo "Setting up vim"
-cp ./vim/colors/* ~/.vim/colors/ # copying colors
-echo "Copied vim colors"
+#cp ./vim/colors/* ~/.vim/colors/ # copying colors
+#echo "Copied vim colors"
 
 # install Vundle.vim
 if [ ! -d ~/.vim/bundle/Vundle.vim ]; then
 	git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-	echo "im here"
+	echo "Installed Vundle for vim"
 fi
 
 # link .vimrc

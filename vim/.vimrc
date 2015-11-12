@@ -1,6 +1,6 @@
 "=============================================================================
 
-" Last modified: May 17, 2015
+" Last modified: Nov 11, 2015
 " Author: James A. Lee
 "
 " Sections:
@@ -11,7 +11,6 @@
 " 	=> Plugin_Settings
 " 	=> Plugins
 "
-
 "=============================================================================
 
 " => Settings "{{{
@@ -26,7 +25,7 @@
 set nu				" line numbering on
 set autoindent			" turns autoindent on
 set noerrorbells		" turns off annoying bell sounds for errors
-"set visualbell			" screen flashes instead of error bell 
+"set visualbell			" screen flashes instead of error bell
 set ignorecase			" search without regards to case
 set backspace=2			" backspace over everything
 "set confirm			" Shows dialog when exiting without saving
@@ -35,7 +34,7 @@ set fileformats=unix,dos,mac	" open files from mac/dos
 set exrc			" open local config files
 set nojoinspaces		" don't add white space when I don't tell you to
 set showmatch			" show match when inserting {}, [], or ()
-set incsearch			" incremental 
+set incsearch			" incremental
 set noswapfile			" no intermediate files used when saving
 set ruler			" always show position in file
 set foldmethod=marker
@@ -73,7 +72,7 @@ if has('mouse')
 endif
 
 " Don't redraw while executing macros (good performance config)
-set lazyredraw 
+set lazyredraw
 
 " For regular expressions turn magic on
 set magic
@@ -106,14 +105,15 @@ set viminfo^=%
 
 " syntax coloring
 au BufRead,BufNewFile *.ino set filetype=c " for arduino
+au FileType javascipt call JavaScriptFold()
 
-set omnifunc=syntaxcomplete#Complete 
+"set omnifunc=syntaxcomplete#Complete
 
-set statusline+=%warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-" Saving and Loading fold views when closing and opening vim 
+" Saving and Loading fold views when closing and opening vim
 " useful when doing fold in manual mode
 "au BufWinLeave * mkview
 "au BufWinEnter * silent loadview
@@ -123,11 +123,11 @@ set statusline+=%*
 " **************************************
 " When going over 80 chars, will start highlighting red
 "let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
-"Show 80 Column line 
+"Show 80 Column line
 "if exists('+colorcolumn')
 "	set colorcolumn=80
 "else
-"	au BufWinEnter * let w:m2=matchadd('ErrorMsg','\%>80v.\+',-1) 
+"	au BufWinEnter * let w:m2=matchadd('ErrorMsg','\%>80v.\+',-1)
 "endif
 
 "highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
@@ -145,7 +145,7 @@ let &colorcolumn="80,".join(range(500,999),",")
 " *****************************************************************************
 " Check out shortcut section for auto-retabbing shortcut
 
-" expandtab: Expand tabs in the following file extensions to spaces so that 
+" expandtab: Expand tabs in the following file extensions to spaces so that
 "            they are spaces instead of tabs
 " tabstop: When tab is pressed, inserts 2 spaces instead
 " shiftwidth: (with auto-indentation) when indent happens, inserts 2 spaces
@@ -176,13 +176,12 @@ set shiftwidth=2
 " -----------------------------------------------------------------------------
 " * COLORSCHEME
 " -----------------------------------------------------------------------------
-" There are lots of colorschemes you can use! My personal favorite is 
+" There are lots of colorschemes you can use! My personal favorite is
 " desert. You can see all the colors by opening a file and doing
 " :colorscheme <CTRL> + <D> and then picking an option.
 
 " :colorscheme birdsofparadise
-syntax enable 
-set background=dark
+syntax enable
 "colorscheme northsky
 
 "let g:solarized_termcolors = 256
@@ -191,8 +190,11 @@ set background=dark
 "let g:hybrid_use_Xresources = 1
 try
 "colorscheme hybrid
+set background=dark
 colorscheme molokai
+colorscheme Tomorrow-Night-Eighties
 catch
+echo "no molokai"
 endtry
 
 " if no colorschemes installed, can use the following.
@@ -205,7 +207,7 @@ endtry
 syntax on
 
 " colors
-hi Search          ctermfg=15 ctermbg=9 
+hi Search          ctermfg=15 ctermbg=9
 hi Visual          ctermbg=236
 hi Normal          ctermfg=7
 hi Comment         ctermfg=8
@@ -228,15 +230,15 @@ hi Type            ctermfg=9                cterm=none
 hi Macro           ctermfg=31
 hi SpecialKey      ctermfg=81
 "hi SpecialKey      ctermfg=81
-"hi Macro           ctermfg=71 
+"hi Macro           ctermfg=71
 
 hi Directory       ctermfg=83               cterm=bold
 
-hi FoldColumn      ctermfg=67  ctermbg=233 
+hi FoldColumn      ctermfg=67  ctermbg=233
 hi Folded          ctermfg=67  ctermbg=233
 
 " -----------------------------------------------------------------------------
-" * SCREEN 
+" * SCREEN
 " -----------------------------------------------------------------------------
 if match($TERM, "screen")!=-1
   "set term=screen-256color
@@ -339,9 +341,9 @@ let g:UltiSnipsEditSplit="vertical"
 " *****************************************************************************
 " ******************************  MAPPING  ************************************
 " *****************************************************************************
-	
+
 " -----------------------------------------------------------------------------
-" * Makefile 
+" * Makefile
 " -----------------------------------------------------------------------------
 " quicklist // for error checking
 nnoremap cn :cn<CR>
@@ -366,7 +368,7 @@ let locationlist=1
 
 " <F1>
 nnoremap <silent> <F1> :NumbersToggle<CR> :set nu<CR>
-" <F2> 
+" <F2>
 nnoremap <F2> :wa<CR>:make<SPACE>
 " <F3>
 nnoremap <silent> <F3> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
@@ -410,7 +412,7 @@ imap <C-j> <Down>
 imap <C-k> <Up>
 imap <C-x> <C-o>x
 
-" -> Windows 
+" -> Windows
 nmap <leader>swh :topleft  vnew<CR>
 nmap <leader>swl :botright vnew<CR>
 nmap <leader>swk :topleft  new<CR>
@@ -439,10 +441,10 @@ map <leader>te :tabe<Space>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<CR>
-map <leader>tm :tabmove 
+map <leader>tm :tabmove
 map <leader>tq :tabclose<CR>
 
-" -> Buffers 
+" -> Buffers
 " opening new buffers
 nmap <leader>sh :leftabove  vnew<CR>
 nmap <leader>sl :rightbelow vnew<CR>
@@ -467,7 +469,7 @@ map <C-n> :NERDTreeToggle<CR>
 map <leader>nb <C-n>B
 map <leader>nf :NERDTreeFind<CR>
 
-" // ctags 
+" // ctags
 nnoremap <leader>c :!ctags -R -f ./.tags .<CR>
 
 " // CtrlP
@@ -571,6 +573,10 @@ Plugin 'Shougo/neocomplete.vim'
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
 Plugin 'molokai'
+Plugin 'chriskempson/vim-tomorrow-theme'
+
+" Syntax color
+Plugin 'jelera/vim-javascript-syntax'
 "Plugin 'Solarized'
 " edkolev/tmuxline.vim
 
