@@ -244,6 +244,97 @@ if match($TERM, "screen")!=-1
 endif
 "}}}
 
+" => Plugin_Settings "{{{
+" *****************************************************************************
+" ************************* Plugin_Settings ***********************************
+" *****************************************************************************
+
+" -----------------------------------------------------------------------------
+" // syntastic settings
+" -----------------------------------------------------------------------------
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_loc_list_height = 3
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"if($STM32 == 1)
+  "let g:syntastic_c_checkers = ['make']
+"endif
+
+" examples
+"if(stridx(expand("%:p:h"), "/Users/batman/Projects/Micromouse/Code/src/") == 0 || stridx(expand("%:p:h"), "~/Projects/Micromouse/Code/src/") == 0)
+"  let b:syntastic_checkers = ['make']
+"endif
+"let g:syntastic_c_config_file = '.syntastic_c_config'
+"let g:syntastic_c_include_dirs = ['~/uMouse/Code/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/']
+"let g:syntastic_c_remove_include_errors = 1
+"let g:syntastic_c_no_default_include_dirs = 1
+"let g:syntastic_c_check_header = 1
+"let g:syntastic_c_auto_refresh_includes = 0
+
+" -----------------------------------------------------------------------------
+" // neocomplcache settings
+" -----------------------------------------------------------------------------
+"let g:neocomplcache_enable_at_startup = 1
+"let g:neocomplcache_enable_smart_case = 1
+"let g:neocomplcache_min_syntax_length = 3
+
+" -----------------------------------------------------------------------------
+" // youcompleteme settings
+" -----------------------------------------------------------------------------
+"let g:ycm_key_list_select_completion=[]
+"let g:ycm_key_list_previous_completion=[]
+"let g:ycm_global_ycm_extr_conf = "~/.ycm_extra_conf.py"
+"let g:ycm_register_as_syntastic_checker = 0
+
+
+" -----------------------------------------------------------------------------
+" // airline settings
+" -----------------------------------------------------------------------------
+"let g:airline#extension#batline#enabled = 1
+
+" -----------------------------------------------------------------------------
+" // nerdtree settings
+" -----------------------------------------------------------------------------
+let nerdtreedirarrows=0
+
+" // indentline settings
+let g:indentLine_color_term = 239
+"let g:indentLine_char = '|'
+
+" // EasyMotion Settings
+let g:EasyMotion_smartcase = 1
+
+" -----------------------------------------------------------------------------
+" // neocomplete settings
+" -----------------------------------------------------------------------------
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+"" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" " Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" " Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+" -----------------------------------------------------------------------------
+" // ultisnips settings
+" -----------------------------------------------------------------------------
+let g:ultisnipsexpandtrigger="<C-e>"
+let g:ultisnipseditsplit="vertical"
+" -----------------------------------------------------------------------------
+" // utisnip settings
+" -----------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger="<C-e>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+"}}}
+
 " => Mapping "{{{
 " *****************************************************************************
 " ******************************  MAPPING  ************************************
@@ -396,7 +487,32 @@ map <Leader><Leader><Space> <Plug>(easymotion-sn)
 map <Leader><Leader><Space> <Plug>(easymotion-tn)
 
 " // Numbers
-map <C-c> <C-c><F3>"}}}
+nmap <C-c> <C-c><F3>
+
+" // neocomplete
+" Plugin key-mappings.
+" inoremap <expr><C-g>     neocomplete#undo_completion()
+"inoremap <expr><C-l>     neocomplete#mappings()
+"inoremap <expr><C-l> <Right>
+"
+" " Recommended key-mappings.
+" " <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  "return (pumvisible()) ? "\<C-y>" : "" ) . "\<CR>"
+		"" For no inserting <CR> key.
+		""   "return pumvisible() ? "\<C-y>" : "\<CR>"
+  "endfunction
+
+"   " <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+inoremap <expr><C-z> neocomplete#smart_close_popup().""
+
+"   " Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? "\<Space>" : "\<Space>"
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"}}}
 "}}}
 
 " => Functions "{{{
@@ -405,72 +521,6 @@ map <C-c> <C-c><F3>"}}}
 " *****************************************************************************
 function! Example()
 endfunction
-"}}}
-
-" => Plugin_Settings "{{{
-" *****************************************************************************
-" ************************* Plugin_Settings ***********************************
-" *****************************************************************************
-
-" -----------------------------------------------------------------------------
-" // syntastic settings
-" -----------------------------------------------------------------------------
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_loc_list_height = 3
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-if($STM32 == 1)
-  let g:syntastic_c_checkers = ['make']
-endif
-" examples
-"if(stridx(expand("%:p:h"), "/Users/batman/Projects/Micromouse/Code/src/") == 0 || stridx(expand("%:p:h"), "~/Projects/Micromouse/Code/src/") == 0)
-"  let b:syntastic_checkers = ['make']
-"endif
-"let g:syntastic_c_config_file = '.syntastic_c_config'
-"let g:syntastic_c_include_dirs = ['~/uMouse/Code/STM32F10x_StdPeriph_Lib_V3.5.0/Libraries/CMSIS/CM3/DeviceSupport/ST/STM32F10x/']
-"let g:syntastic_c_remove_include_errors = 1
-"let g:syntastic_c_no_default_include_dirs = 1
-"let g:syntastic_c_check_header = 1
-"let g:syntastic_c_auto_refresh_includes = 0
-
-" -----------------------------------------------------------------------------
-" // neocomplcache settings
-" -----------------------------------------------------------------------------
-let g:neocomplcache_enable_at_startup = 1
-let g:neocomplcache_enable_smart_case = 1
-let g:neocomplcache_min_syntax_length = 3
-
-" -----------------------------------------------------------------------------
-" // youcompleteme settings
-" -----------------------------------------------------------------------------
-let g:ycm_key_list_select_completion=[]
-let g:ycm_key_list_previous_completion=[]
-"let g:ycm_global_ycm_extr_conf = "~/.ycm_extra_conf.py"
-let g:ycm_register_as_syntastic_checker = 0
-
-" -----------------------------------------------------------------------------
-" // ultisnips settings
-" -----------------------------------------------------------------------------
-let g:ultisnipsexpandtrigger="<tab>"
-let g:ultisnipseditsplit="vertical"
-
-" -----------------------------------------------------------------------------
-" // airline settings
-" -----------------------------------------------------------------------------
-"let g:airline#extension#batline#enabled = 1
-
-" -----------------------------------------------------------------------------
-" // nerdtree settings
-" -----------------------------------------------------------------------------
-let nerdtreedirarrows=0
-
-" // indentline settings
-let g:indentLine_color_term = 239
-"let g:indentLine_char = '|'
-
-" // EasyMotion Settings
-let g:EasyMotion_smartcase = 1
 "}}}
 
 " => Plugins "{{{
@@ -495,8 +545,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree.git'
 Plugin 'Buffergator'
+
 Plugin 'ctrlp.vim'
-"Plugin 'Syntastic'
+
 Plugin 'Tagbar'
 Plugin 'The-NERD-Commenter'
 Plugin 'fugitive.vim'
@@ -508,11 +559,15 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'bling/vim-airline'
 Plugin 'myusuf3/numbers.vim'
 Plugin 'Yggdroot/indentLine'
-"Plugin 'Valloric/YouCompleteMe.git'
+
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Shougo/neocomplete.vim'
+
+"Plugin 'Syntastic'
+"Plugin 'Valloric/YouCompleteMe.git'
 "Plugin 'Shougo/neocomplcache'
+
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
 Plugin 'molokai'
