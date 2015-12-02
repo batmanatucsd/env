@@ -4,6 +4,10 @@ cat ~/env/batman
 #export PATH="$PATH:/usr/local/bin"
 export PATH="$PATH:/usr/lib/stlink"
 
+#if [ -f `brew --prefix`/etc/bash_completion ]; then
+		#. `brew --prefix`/etc/bash_completion
+#fi
+
 # ORIGINAL gcc/g++ links
 # /usr/bin/gcc -> llvm-gcc-4.2
 # /usr/bin/g++ -> llvm-g++-4.2
