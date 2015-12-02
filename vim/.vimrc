@@ -150,12 +150,12 @@ let &colorcolumn="80,".join(range(500,999),",")
 " tabstop: When tab is pressed, inserts 2 spaces instead
 " shiftwidth: (with auto-indentation) when indent happens, inserts 2 spaces
 "             instead
-au BufRead,BufNewFile *.{js,c,h,cpp,hpp,java,ml,py} set expandtab
-au BufRead,BufNewFile *.{js,c,h,cpp,hpp,java,ml,py} set tabstop=2
-au BufRead,BufNewFile *.{js,c,h,cpp,hpp,java,ml,py} set shiftwidth=2
+au BufRead,BufNewFile *.{js,c,h,cpp,hpp,java,ml,py,html} set expandtab
+au BufRead,BufNewFile *.{js,c,h,cpp,hpp,java,ml,py,html} set tabstop=4
+au BufRead,BufNewFile *.{js,c,h,cpp,hpp,java,ml,py,html} set shiftwidth=4
 
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 "set softtabstop=2
 
 "set expandtab
@@ -329,9 +329,11 @@ let g:ultisnipseditsplit="vertical"
 " -----------------------------------------------------------------------------
 " // utisnip settings
 " -----------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger="<C-e>"
+"let g:UltiSnipsExpandTrigger="<C-e>"
+let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsListSnippets="<C-e>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
