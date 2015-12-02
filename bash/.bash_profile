@@ -52,7 +52,9 @@ CYAN='\e[0;36m';
 #export PS1='\e[1;33m\]\h:\W \u\$\e[0m\] '
 #export PS1='\[\e[1;33m\]\h:\[\e[0;33m\]\u \[\e[0;34m\]\W\[\e[1;33m\](^_^):\[\e[0m\] '
 #export PS1="$BLUE[$GREEN\t$BLUE]$NORMAL:$YELLOW\u $BLUE\W$YELLOW(^_^):$NORMAL "
-export PS1="\e[0;36m┌─$YELLOW (^_^)$NORMAL:$CYAN[$GREEN\t$CYAN]$NORMAL:$YELLOW\u $BLUE\w$NORMAL:\n\e[0;36m└──> $NORMAL"
+#export PS1="\e[0;36m┌─$YELLOW (^_^)$NORMAL:$CYAN[$GREEN\t$CYAN]$NORMAL:$YELLOW\u $BLUE\w$NORMAL:\n\e[0;36m└──> $NORMAL"
+source ~/env/.git-prompt.sh
+export PS1="\e[0;36m┌─$YELLOW (^_^)$NORMAL:$CYAN[$GREEN\t$CYAN]$NORMAL:$YELLOW\u $BLUE\w $(__git_ps1 " (%s)")$NORMAL:\n\e[0;36m└──> $NORMAL"
 
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01;36:quote=01'
