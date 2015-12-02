@@ -39,18 +39,12 @@ function mkdircd () { mkdir -p "$@" && eval cd "\"\$$#\""; }
 # 	\W - base name of the current working directory
 #		\t - time in hh:mm:ss form
 # Color Variables
-#BLUE='\[\e[0;34m\]';
-#RED='\[\e[0;31m\]';
-#YELLOW='\[\e[1;33m\]';
-#GREEN='\[\e[1;32m\]';
-#NORMAL='\[\e[0m\]';
-
-BLUE='\e[0;34m';
-RED='\e[0;31m';
-YELLOW='\e[1;33m';
-GREEN='\e[1;32m';
-NORMAL='\e[0m';
-CYAN='\e[0;36m';
+BLUE='\[\e[0;34m\]';
+RED='\[\e[0;31m\]';
+CYAN='\[\e[0;36m\]';
+YELLOW='\[\e[1;33m\]';
+GREEN='\[\e[1;32m\]';
+NORMAL='\[\e[0m\]';
 
 #export \h:\W \u\$ DEFAULT
 #export PS1='\e[1;33m\]\h:\W \u\$\e[0m\] '
@@ -58,7 +52,7 @@ CYAN='\e[0;36m';
 #export PS1="$BLUE[$GREEN\t$BLUE]$NORMAL:$YELLOW\u $BLUE\W$YELLOW(^_^):$NORMAL "
 #export PS1="\e[0;36m┌─$YELLOW (^_^)$NORMAL:$CYAN[$GREEN\t$CYAN]$NORMAL:$YELLOW\u $BLUE\w$NORMAL:\n\e[0;36m└──> $NORMAL"
 source ~/env/.git-prompt.sh
-export PS1="\e[0;36m┌─$YELLOW (^_^)$NORMAL:$CYAN[$GREEN\t$CYAN]$NORMAL:$YELLOW\u $BLUE\w$RED\$(__git_ps1)$NORMAL:\n\e[0;36m└───> $NORMAL"
+export PS1="\[\e[0;36m\]┌─$YELLOW (^_^)$NORMAL:$CYAN[$GREEN\t$CYAN]$NORMAL:$YELLOW\u $BLUE\w$RED\$(__git_ps1)$NORMAL:\n\[\e[0;36m\]└───> $NORMAL"
 
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01;36:quote=01'
