@@ -404,8 +404,8 @@ imap { {<Cr><Cr>}<Up><Tab>
 imap [ []<Left>
 imap ( ()<Left>
 imap [] []
-imap {} {}
-imap () ()<Right>
+imap {} {}<Left>
+imap () ()
 
 " Navigation
 imap <C-l> <Right>
