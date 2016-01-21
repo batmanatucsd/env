@@ -324,7 +324,7 @@ let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
 " -----------------------------------------------------------------------------
 " // ultisnips settings
 " -----------------------------------------------------------------------------
-let g:ultisnipsexpandtrigger="<C-e>"
+let g:ultisnipsexpandtrigger="<tab>"
 let g:ultisnipseditsplit="vertical"
 " -----------------------------------------------------------------------------
 " // utisnip settings
