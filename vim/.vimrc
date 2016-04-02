@@ -30,6 +30,7 @@ set ignorecase			" search without regards to case
 set backspace=2			" backspace over everything
 "set confirm			" Shows dialog when exiting without saving
 set nowrap			" turns off word wrapping
+set fo-=t			" don't automatically wrap text when typing
 set fileformats=unix,dos,mac	" open files from mac/dos
 set exrc			" open local config files
 set nojoinspaces		" don't add white space when I don't tell you to
@@ -37,8 +38,8 @@ set showmatch			" show match when inserting {}, [], or ()
 set incsearch			" incremental
 set noswapfile			" no intermediate files used when saving
 set ruler			" always show position in file
-set foldmethod=marker
-"set foldmethod=manual
+"set foldmethod=marker
+set foldmethod=indent
 set hlsearch			" highlight searches
 set laststatus=2  " always have status line
 set cursorline    " shows the line that the cursor is on
@@ -68,7 +69,7 @@ set autoread
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
-  set mouse=a
+  set mouse=a "On OSX press ALT and click
 endif
 
 " Don't redraw while executing macros (good performance config)
@@ -81,9 +82,9 @@ set magic
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
 
-" Linebreak on 500 characters
+" Linebreak on 79 characters
 set lbr
-set tw=500
+set tw=79 " width of document ( used by gd )
 
 set ai "Auto indent
 set si "Smart indent
@@ -95,11 +96,37 @@ set novisualbell
 set noeb vb t_vb=
 set tm=500
 
+"better copy and paste
+set pastetoggle=<F2>
+set clipboard=unnamed
+
+" Automatic reloading of .vimrc
+autocmd! bufwritepost .vimrc source %
+
+" Show whitespace
+" MUST be inserted BEFORE the colorscheme command
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+au InsertEnter * match ExtraWhitespace /\s\+$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+
+" Gets rid off preview popup from complete (python)
+autocmd CompleteDone * pclose
+
+filetype plugin on
+"au FileType php setl ofu=phpcomplete#CompletePHP
+"au FileType ruby,eruby setl ofu=rubycomplete#Complete
+au FileType html,xhtml setl ofu=htmlcomplete#CompleteTags
+au FileType c setl ofu=ccomplete#Complete
+au FileType cpp setl ofu=ccomplete#CompleteCpp
+au FileType css setl ofu=csscomplete#CompleteCSS
+au FileType python setlocal omnifunc=pythoncomplete#Complete
+
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
 " Remember info about open buffers on close
 set viminfo^=%
 
@@ -191,10 +218,10 @@ syntax enable
 try
 "colorscheme hybrid
 set background=dark
-colorscheme molokai
+"colorscheme molokai
 colorscheme Tomorrow-Night-Eighties
 catch
-echo "no molokai"
+echo "no matching colorscheme"
 endtry
 
 " if no colorschemes installed, can use the following.
@@ -210,11 +237,18 @@ syntax on
 hi Search          ctermfg=15 ctermbg=9
 hi Visual          ctermbg=236
 hi Normal          ctermfg=7
-hi Comment         ctermfg=8
+"hi Comment         ctermfg=8
+"hi Comment         ctermfg=42
+hi Comment         ctermfg=35
 hi ColorColumn     ctermbg=235
 hi LineNr          ctermfg=white ctermbg=237
 hi CursorLineNr    ctermfg=9
 
+:hi TODO ctermfg=11 ctermbg=none
+:syntax match TODO /TODO/
+
+":hi // ctermfg=8 ctermbg=none
+":syntax match // //////
 
 "hi Function        ctermfg=31
 hi Function        ctermfg=81
@@ -289,11 +323,21 @@ endif
 "let g:ycm_global_ycm_extr_conf = "~/.ycm_extra_conf.py"
 "let g:ycm_register_as_syntastic_checker = 0
 
+" -----------------------------------------------------------------------------
+" // indentLine settings
+" -----------------------------------------------------------------------------
+let g:indentLine_leadingSpaceEnabled = 1
+"let g:indentLine_leadingSpaceChar = '·'
+let g:indentLine_leadingSpaceChar = '_'
+let g:indentLine_showFirstIndentLevel = -1
+let g:indentLine_char = '^'
+let g:indentLine_first_char = '^'
 
 " -----------------------------------------------------------------------------
 " // airline settings
 " -----------------------------------------------------------------------------
 "let g:airline#extension#batline#enabled = 1
+let g:airline_detect_whitespace=0
 
 " -----------------------------------------------------------------------------
 " // nerdtree settings
@@ -348,18 +392,30 @@ let g:UltiSnipsEditSplit="vertical"
 " * Makefile
 " -----------------------------------------------------------------------------
 " quicklist // for error checking
+nnoremap co :copen<CR>
+nnoremap cO :cclose<CR>
 nnoremap cn :cn<CR>
 nnoremap cp :cp<CR>
 
+" new file
+nnoremap <leader>e :e<SPACE>
 " save and make
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :wq<CR>
+nnoremap <leader>w :update<CR>
+nnoremap <leader>q :qa<CR>
+vnoremap <leader>s :sort<CR>
+
+" easier moving a block of code
+vnoremap < <gv " better indentation
+vnoremap > >gv " better indentation
+
+vmap Q gq
+nmap Q gqap
 
 " gdb
 nnoremap <leader>g :call gdb("")<Left><Left>
 
 " fold
-nnoremap <SPACE> za
+nnoremap <SPACE> zA
 
 " -> Function Keys "{{{
 " -----------------------------------------------------------------------------
@@ -371,11 +427,18 @@ let locationlist=1
 " <F1>
 nnoremap <silent> <F1> :NumbersToggle<CR> :set nu<CR>
 " <F2>
-nnoremap <F2> :wa<CR>:make<SPACE>
+nnoremap <F2> :wa<CR>
 " <F3>
 nnoremap <silent> <F3> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
+" <F4>
+nnoremap <F4> :make<SPACE>
+
 "<F5>
 "nnoremap <silent> <F5> :if (locationlist%2 == 0) \| lclose <cr> lclose \| else \| lopen3 \| endif \| let locationlist=locationlist+1<cr>
+
+"Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+
 " <F7>
 " used for gdb macros
 " <F8>
@@ -402,17 +465,17 @@ map <C-l> <C-w>l
 " Pairs
 imap { {<Cr><Cr>}<Up><Tab>
 imap [ []<Left>
-imap ( ()<Left>
+"imap ( ()<Left>
 imap [] []
 imap {} {}<Left>
-imap () ()
+"imap () ()
 
 " Navigation
 imap <C-l> <Right>
 imap <C-h> <Left>
 imap <C-j> <Down>
 imap <C-k> <Up>
-imap <C-x> <C-o>x
+"imap <C-x> <C-o>x
 
 " -> Windows
 nmap <leader>swh :topleft  vnew<CR>
@@ -433,8 +496,12 @@ map <leader>0 <C-w>=
 " -----------------------------------------------------------------------------
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nmap <Leader>l :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
+
+nmap 9gt <esc>:tablast<CR>
+map <leader>o <esc>:tabprevious<CR>
+map <leader>p <esc>:tabnext<CR>
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -454,10 +521,10 @@ nmap <leader>sk :leftabove  new<CR>
 nmap <leader>sj :rightbelow new<CR>
 
 " toggle between last buffer
-nmap <Leader>l :b#<CR>
+"nmap <Leader>l :b#<CR>
 
 " close current buffer
-nmap <leader>x :q<CR>
+nmap <leader>x :wq<CR>
 
 " delete current buffer
 nmap <leader>d :bd<CR>
@@ -497,10 +564,9 @@ nmap <C-c> <C-c><F3>
 " Plugin key-mappings.
 " inoremap <expr><C-g>     neocomplete#undo_completion()
 "inoremap <expr><C-l>     neocomplete#mappings()
-"inoremap <expr><C-l> <Right>
 "
 " " Recommended key-mappings.
-" " <CR>: close popup and save indent.
+" <CR>: close popup and save indent.
 "inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 "function! s:my_cr_function()
   "return (pumvisible()) ? "\<C-y>" : "" ) . "\<CR>"
@@ -510,12 +576,13 @@ nmap <C-c> <C-c><F3>
 
 "   " <C-h>, <BS>: close popup and delete backword char.
 "inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-z> neocomplete#smart_close_popup().""
+"inoremap <expr><C-z> neocomplete#smart_close_popup().""
+""inoremap <expr><C-l> neocomplete#smart_close_popup()
 
 "   " Close popup by <Space>.
 inoremap <expr><Space> pumvisible() ? "\<Space>" : "\<Space>"
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 "}}}
 "}}}
 
@@ -566,7 +633,7 @@ Plugin 'Yggdroot/indentLine'
 
 Plugin 'justinmk/vim-syntax-extra'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'Shougo/neocomplete.vim'
+"Plugin 'Shougo/neocomplete.vim'
 
 "Plugin 'Syntastic'
 "Plugin 'Valloric/YouCompleteMe.git'
@@ -588,4 +655,3 @@ filetype plugin indent on " required
 " To ignore plugin indent changes, instead use:
 " filetype plugin on
 "}}}
-
