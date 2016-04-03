@@ -338,6 +338,7 @@ let g:indentLine_first_char = '^'
 " -----------------------------------------------------------------------------
 "let g:airline#extension#batline#enabled = 1
 let g:airline_detect_whitespace=0
+let g:airline#extensions#whitespace#enabled=0
 
 " -----------------------------------------------------------------------------
 " // nerdtree settings
