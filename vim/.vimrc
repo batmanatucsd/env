@@ -209,15 +209,15 @@ set shiftwidth=4
 
 " :colorscheme birdsofparadise
 syntax enable
-"colorscheme northsky
 
 "let g:solarized_termcolors = 256
-"colorscheme solarized
 
 "let g:hybrid_use_Xresources = 1
-try
-"colorscheme hybrid
 set background=dark
+try
+"colorscheme northsky
+"colorscheme hybrid
+"colorscheme solarized
 "colorscheme molokai
 colorscheme Tomorrow-Night-Eighties
 catch
@@ -240,18 +240,22 @@ hi Normal          ctermfg=7
 "hi Comment         ctermfg=8
 "hi Comment         ctermfg=42
 hi Comment         ctermfg=35
-hi ColorColumn     ctermbg=235
+"hi ColorColumn     ctermbg=235
+"hi ColorColumn     ctermbg=27
+hi ColorColumn     ctermbg=237
 hi LineNr          ctermfg=white ctermbg=237
 hi CursorLineNr    ctermfg=9
+hi String ctermfg=184
 
-:hi TODO ctermfg=11 ctermbg=none
+":hi TODO ctermfg=11 ctermbg=none
+:hi TODO ctermfg=160 ctermbg=none
 :syntax match TODO /TODO/
 
 ":hi // ctermfg=8 ctermbg=none
 ":syntax match // //////
 
 "hi Function        ctermfg=31
-hi Function        ctermfg=81
+"hi Function        ctermfg=81
 
 " incdlue
 hi PreProc         ctermfg=1
@@ -269,7 +273,11 @@ hi SpecialKey      ctermfg=81
 hi Directory       ctermfg=83               cterm=bold
 
 hi FoldColumn      ctermfg=67  ctermbg=233
-hi Folded          ctermfg=67  ctermbg=233
+"hi Folded          ctermfg=67  ctermbg=233
+"hi Folded          ctermfg=39  ctermbg=234
+"hi Folded          ctermfg=81  ctermbg=234
+"hi Folded          ctermfg=122  ctermbg=234
+hi Folded          ctermfg=166  ctermbg=234
 
 " -----------------------------------------------------------------------------
 " * SCREEN
@@ -337,7 +345,7 @@ let g:indentLine_first_char = '^'
 " // airline settings
 " -----------------------------------------------------------------------------
 "let g:airline#extension#batline#enabled = 1
-let g:airline_detect_whitespace=0
+"let g:airline_detect_whitespace=0
 let g:airline#extensions#whitespace#enabled=0
 
 " -----------------------------------------------------------------------------
@@ -384,6 +392,15 @@ let g:UltiSnipsListSnippets="<C-e>"
 let g:UltiSnipsEditSplit="vertical"
 "}}}
 
+
+" -----------------------------------------------------------------------------
+" // python-mode
+" -----------------------------------------------------------------------------
+let g:pymode_breakpoint_bind = '<leader>B'
+let g:pymode_breakpoint_cmd = 'import ipdb; ipdb.set_trace()  # XXX BREAKPOINT'
+let g:pymode_lint_checkers = ['pyflakes', 'mccabe']
+
+
 " => Mapping "{{{
 " *****************************************************************************
 " ******************************  MAPPING  ************************************
@@ -393,15 +410,25 @@ let g:UltiSnipsEditSplit="vertical"
 " * Makefile
 " -----------------------------------------------------------------------------
 " Quickfix List // for error checking
-nnoremap co :copen<CR>
-nnoremap cO :cclose<CR>
-nnoremap cn :cn<CR>
-nnoremap cp :cp<CR>
+nnoremap <C-f>o :copen<CR>
+nnoremap <C-f>c :cclose<CR>
+nnoremap <C-f>n :cnext<CR>
+nnoremap <C-f>p :cprevious<CR>
+
+" Location 
+nnoremap <C-l>o :lopen<CR>
+nnoremap <C-l>c :lclose<CR>
+nnoremap <C-l>n :lnext<CR>
+nnoremap <C-l>p :lprevious<CR>
+
+" Location 
+"nnoremap <C-b> :pclose<CR>
+nnoremap <leader>P :pclose<CR>
 
 " new file
 nnoremap <leader>e :e<SPACE>
 " save and make
-nnoremap <leader>w :update<CR>
+nnoremap <leader>w :wa<CR>
 nnoremap <leader>q :qa<CR>
 vnoremap <leader>s :sort<CR>
 
@@ -428,7 +455,7 @@ let locationlist=1
 " <F1>
 nnoremap <silent> <F1> :NumbersToggle<CR> :set nu<CR>
 " <F2>
-nnoremap <F2> :wa<CR>
+nnoremap <F2> :update<CR>
 " <F3>
 nnoremap <silent> <F3> :if (hlstate%2 == 0) \| nohlsearch \| else \| set hlsearch \| endif \| let hlstate=hlstate+1<cr>
 " <F4>
@@ -525,7 +552,7 @@ nmap <leader>sj :rightbelow new<CR>
 "nmap <Leader>l :b#<CR>
 
 " close current buffer
-nmap <leader>x :wq<CR>
+nmap <leader>x :q<CR>
 
 " delete current buffer
 nmap <leader>d :bd<CR>
@@ -639,6 +666,9 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 "Plugin 'Syntastic'
 "Plugin 'Valloric/YouCompleteMe.git'
 "Plugin 'Shougo/neocomplcache'
+
+" Python Plugin
+Plugin 'klen/python-mode'
 
 " Colorschemes
 Plugin 'w0ng/vim-hybrid'
